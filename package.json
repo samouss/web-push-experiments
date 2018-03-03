@@ -3,7 +3,14 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
+  "scripts": {
+    "start:client": "yarn parcel client/index.html",
+    "start:server": "node server/index.js"
+  },
   "devDependencies": {
-    "parcel-bundler": "^1.6.2"
+    "parcel-bundler": "1.6.2"
+  },
+  "dependencies": {
+    "express": "4.16.2"
   }
 }
