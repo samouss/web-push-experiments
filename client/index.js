@@ -1,8 +1,13 @@
+import encode from './encode';
+
 if (!'serviceWorker' in navigator) {
   console.warn('Sorry, the service Worker is not available in your browser...');
 
   return;
 }
+
+const publicKey =
+  'BAIv1EJPFImOtD8FJqp8700aQ0BVN9xArXeBPSeyooHCyz8Qp-_D7jncuWsucNvFmp7m5Jiitep7tx_idBqv-ZE';
 
 const registerServiceWorker = () =>
   navigator.serviceWorker
@@ -15,6 +20,12 @@ const registerServiceWorker = () =>
       console.log('SW: fail');
       console.log(error);
     });
+
+const registerPush = registration =>
+  registration.pushManager.subscribe({
+    userVisibleOnly: true,
+    applicationServerKey: encode(publicKey),
+  });
 
 const askNotificationsPermission = () =>
   new Promise((resolve, reject) => {
@@ -33,8 +44,10 @@ const askNotificationsPermission = () =>
 
 Promise.all([registerServiceWorker(), askNotificationsPermission()])
   .then(([registration, permission]) => {
-    console.log(registration);
-    console.log(permission);
+    return registerPush(registration);
+  })
+  .then(subscription => {
+    console.log(subscription);
   })
   .catch(error => {
     console.log(error);
