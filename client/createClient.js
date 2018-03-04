@@ -20,9 +20,10 @@ const createClient = endpoint => {
       body: JSON.stringify(subscription),
     });
 
-  const notifications = () =>
-    request('/subscriptions', {
+  const notifications = notification =>
+    request('/notifications', {
       method: 'POST',
+      body: JSON.stringify(notification),
     });
 
   return {
