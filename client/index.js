@@ -16,14 +16,12 @@ const client = createClient(endpoint);
 
 const registerServiceWorker = () =>
   navigator.serviceWorker
-    .register('./sw.js')
+    .register('./serviceWorker.js')
     .then(registration => {
-      console.log('SW: register');
       return registration;
     })
     .catch(error => {
-      console.log('SW: fail');
-      console.log(error);
+      return error;
     });
 
 const registerPush = registration =>
@@ -53,9 +51,6 @@ Promise.all([registerServiceWorker(), askNotificationsPermission()])
   })
   .then(subscription => {
     return client.subscriptions(subscription);
-  })
-  .then(response => {
-    console.log('PUSH: register');
   })
   .catch(error => {
     console.log(error);
