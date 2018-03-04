@@ -1,5 +1,5 @@
 import 'bulma/css/bulma.css';
-import encode from './encode';
+import { encode, createDeviceId } from './utils';
 import createClient from './createClient';
 
 if (!'serviceWorker' in navigator) {
@@ -14,6 +14,7 @@ const publicKey =
   'BAIv1EJPFImOtD8FJqp8700aQ0BVN9xArXeBPSeyooHCyz8Qp-_D7jncuWsucNvFmp7m5Jiitep7tx_idBqv-ZE';
 
 const client = createClient(endpoint);
+const deviceId = createDeviceId();
 
 const registerServiceWorker = () =>
   navigator.serviceWorker
@@ -51,7 +52,10 @@ Promise.all([registerServiceWorker(), askNotificationsPermission()])
     return registerPush(registration);
   })
   .then(subscription => {
-    return client.subscriptions(subscription);
+    return client.subscriptions({
+      deviceId,
+      subscription,
+    });
   })
   .catch(error => {
     console.log(error);
@@ -63,7 +67,7 @@ form.addEventListener('submit', event => {
   event.preventDefault();
 
   const button = event.currentTarget.querySelector('button');
-  const content = [...event.currentTarget.elements]
+  const payload = [...event.currentTarget.elements]
     .filter(element => element.tagName === 'INPUT')
     .map(element => [element.name, element.value || element.placeholder])
     .reduce(
@@ -77,7 +81,10 @@ form.addEventListener('submit', event => {
   button.classList.add('is-loading');
 
   client
-    .notifications(content)
+    .notifications({
+      notification: payload,
+      deviceId,
+    })
     .catch(error => {
       console.log(error);
     })

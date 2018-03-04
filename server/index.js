@@ -7,7 +7,7 @@ const port = process.env.PORT || 3000;
 const publicKey = process.env.PUSH_PUBLIC_KEY || '';
 const privateKey = process.env.PUSH_PRIVATE_KEY || '';
 
-const state = new Set();
+const state = new Map();
 const server = express();
 
 // prettier-ignore
@@ -22,19 +22,21 @@ server.use(bodyParser.json());
 
 // Register a subscription
 server.post('/subscriptions', (req, res) => {
-  state.add(req.body);
+  const { deviceId, subscription } = req.body;
+
+  state.set(deviceId, subscription);
 
   res.status(201).end();
 });
 
 // Trigger notifications
 server.post('/notifications', (req, res) => {
-  const payload = JSON.stringify(req.body);
-  const requests = [...state].map(subsription =>
-    webPush.sendNotification(subsription, payload)
-  );
+  const { deviceId, notification } = req.body;
+  const subscription = state.get(deviceId);
+  const payload = JSON.stringify(notification);
 
-  Promise.all(requests)
+  webPush
+    .sendNotification(subscription, payload)
     .then(() => {
       res.status(201).end();
     })
