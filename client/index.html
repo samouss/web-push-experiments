@@ -5,12 +5,53 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
+  <title>Push Notification</title>
 </head>
 
 <body>
-  <h1>Hello</h1>
+  <section class="hero is-medium is-dark is-bold">
+    <div class="hero-body">
+      <div class="container">
+        <h1 class="title">Push Notifications</h1>
+        <h2 class="subtitle">Example of push notifications usage in the browser.</h2>
+      </div>
+    </div>
+  </section>
 
+  <section class="section">
+    <div class="container">
+      <div class="notification">
+        <p>This is an experiments using
+          <a href="https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API" target="_blank" rel="noopener">ServiceWorker</a> &
+          <a href="https://developer.mozilla.org/en-US/docs/Web/API/Notifications_API" target="_blank" rel="noopener">Push Notification</a> APIs. You can find the code on
+          <a href="https://github.com/samouss/push-notification-experiments" target="_blank" rel="noopener">GitHub</a>.</p>
+      </div>
+
+      <form>
+        <div class="field">
+          <label class="label">Title</label>
+          <div class="control">
+            <input class="input" type="text" name="title" placeholder="Hello World 👋">
+            <p class="help">The title that must be shown within the notification.</p>
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">Body</label>
+          <div class="control">
+            <input class="input" type="text" name="body" placeholder="Lorem ipsum dolor sit amet...">
+            <p class="help">Content to display within the notification.</p>
+          </div>
+        </div>
+
+        <div class="field is-grouped is-grouped-right">
+          <p class="control">
+            <button class="button is-link">Show a notification</button>
+          </p>
+        </div>
+      </form>
+    </div>
+  </section>
   <script src="./index.js"></script>
 </body>
 

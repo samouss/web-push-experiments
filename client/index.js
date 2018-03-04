@@ -1,3 +1,4 @@
+import 'bulma/css/bulma.css';
 import encode from './encode';
 import createClient from './createClient';
 
@@ -55,3 +56,32 @@ Promise.all([registerServiceWorker(), askNotificationsPermission()])
   .catch(error => {
     console.log(error);
   });
+
+const form = document.querySelector('form');
+
+form.addEventListener('submit', event => {
+  event.preventDefault();
+
+  const button = event.currentTarget.querySelector('button');
+  const content = [...event.currentTarget.elements]
+    .filter(element => element.tagName === 'INPUT')
+    .map(element => [element.name, element.value || element.placeholder])
+    .reduce(
+      (acc, [name, value]) => ({
+        ...acc,
+        [name]: value,
+      }),
+      {}
+    );
+
+  button.classList.add('is-loading');
+
+  client
+    .notifications(content)
+    .catch(error => {
+      console.log(error);
+    })
+    .finally(() => {
+      button.classList.remove('is-loading');
+    });
+});
