@@ -1,4 +1,5 @@
 import encode from './encode';
+import createClient from './createClient';
 
 if (!'serviceWorker' in navigator) {
   console.warn('Sorry, the service Worker is not available in your browser...');
@@ -6,8 +7,12 @@ if (!'serviceWorker' in navigator) {
   return;
 }
 
+const endpoint = process.env.ENDPOINT || 'http://localhost:3000';
 const publicKey =
+  process.env.PUSH_PUBLIC_KEY ||
   'BAIv1EJPFImOtD8FJqp8700aQ0BVN9xArXeBPSeyooHCyz8Qp-_D7jncuWsucNvFmp7m5Jiitep7tx_idBqv-ZE';
+
+const client = createClient(endpoint);
 
 const registerServiceWorker = () =>
   navigator.serviceWorker
@@ -47,7 +52,10 @@ Promise.all([registerServiceWorker(), askNotificationsPermission()])
     return registerPush(registration);
   })
   .then(subscription => {
-    console.log(subscription);
+    return client.subscriptions(subscription);
+  })
+  .then(response => {
+    console.log('PUSH: register');
   })
   .catch(error => {
     console.log(error);
