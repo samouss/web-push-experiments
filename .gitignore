@@ -22,4 +22,5 @@ node_modules/
 
 # Folder
 dist/
+static/
 .cache
