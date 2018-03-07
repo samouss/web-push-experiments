@@ -5,11 +5,12 @@
   "license": "MIT",
   "scripts": {
     "start:client": "yarn parcel client/index.html",
-    "start:server": "node server/index.js"
+    "start:server": "nodemon server/index.js"
   },
   "devDependencies": {
     "babel-preset-env": "1.6.1",
     "babel-preset-stage-2": "6.24.1",
+    "nodemon": "1.17.1",
     "parcel-bundler": "1.6.2"
   },
   "dependencies": {
