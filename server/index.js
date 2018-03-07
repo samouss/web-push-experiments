@@ -1,3 +1,4 @@
+const path = require('path');
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
@@ -19,6 +20,9 @@ webPush.setVapidDetails(
 
 server.use(cors());
 server.use(bodyParser.json());
+
+// Register static files
+server.use('/', express.static(path.join(__dirname, '..', 'static')));
 
 // Register a subscription
 server.post('/subscriptions', (req, res) => {
