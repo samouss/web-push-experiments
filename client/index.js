@@ -61,9 +61,7 @@ Promise.all([registerServiceWorker(), askNotificationsPermission()])
     console.log(error);
   });
 
-const form = document.querySelector('form');
-
-form.addEventListener('submit', event => {
+document.querySelector('form').addEventListener('submit', event => {
   event.preventDefault();
 
   const button = event.currentTarget.querySelector('button');
