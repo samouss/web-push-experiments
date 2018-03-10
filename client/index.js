@@ -1,5 +1,7 @@
 import 'bulma/css/bulma.css';
-import { encode, createDeviceId, createFallbackMessage } from './utils';
+import { encode, createDeviceId } from './utils';
+import { createNotificationElement, disableButtonElement } from './elements';
+import { createFallbackMessage, createDisableMessage } from './messages';
 import createClient from './createClient';
 
 const isServiceWorkerSupported = 'serviceWorker' in navigator;
@@ -7,16 +9,14 @@ const isNotificationsSupported = 'Notification' in window;
 
 const run = () => {
   if (!isServiceWorkerSupported || !isNotificationsSupported) {
-    const before = document.querySelector('.notification');
-    const element = document.createElement('div');
-    element.className = 'notification is-danger';
-    element.innerHTML = createFallbackMessage({
-      isServiceWorkerSupported,
-      isNotificationsSupported,
-    });
+    createNotificationElement(
+      createFallbackMessage({
+        isServiceWorkerSupported,
+        isNotificationsSupported,
+      })
+    );
 
-    document.querySelector('.--content').insertBefore(element, before);
-    document.querySelector('.button').setAttribute('disabled', true);
+    disableButtonElement();
 
     return;
   }
@@ -51,7 +51,17 @@ const run = () => {
       return permission;
     });
 
-  askNotificationsPermission()
+  const requestNotificationsPermission = askNotificationsPermission().catch(
+    permission => {
+      createNotificationElement(createDisableMessage());
+
+      disableButtonElement();
+
+      return Promise.reject(permission);
+    }
+  );
+
+  requestNotificationsPermission
     .then(() => registerServiceWorker())
     .then(registration => {
       return registerPush(registration);
