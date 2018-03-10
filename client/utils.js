@@ -20,6 +20,23 @@ const uniqueId = () => {
   );
 };
 
+export const createFallbackMessage = ({
+  isServiceWorkerSupported,
+  isNotificationsSupported,
+}) => {
+  const fragments = [
+    "Your browser doesn't support ",
+    !isServiceWorkerSupported &&
+      '<a href="https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API" target="_blank" rel="noopener">ServiceWorker</a>',
+    !isServiceWorkerSupported && !isNotificationsSupported ? ' & ' : '',
+    !isNotificationsSupported &&
+      '<a href="https://developer.mozilla.org/en-US/docs/Web/API/Notifications_API" target="_blank" rel="noopener">Notifications</a>',
+    '.',
+  ];
+
+  return fragments.filter(Boolean).join('');
+};
+
 export const encode = input => {
   const padding = '='.repeat((4 - input.length % 4) % 4);
   const base64 = (input + padding).replace(/\-/g, '+').replace(/_/g, '/');
