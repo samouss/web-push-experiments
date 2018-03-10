@@ -4,6 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
+    "clean": "rm -rf .cache dist static",
     "start:client": "yarn parcel watch client/index.html --out-dir=static --public-url=/ --no-hmr",
     "start:server": "nodemon server/index.js",
     "build": "yarn parcel build client/index.html --out-dir=static --public-url=/",
