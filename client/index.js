@@ -53,8 +53,9 @@ const run = () => {
       return permission;
     });
 
-  Promise.all([registerServiceWorker(), askNotificationsPermission()])
-    .then(([registration, permission]) => {
+  askNotificationsPermission()
+    .then(() => registerServiceWorker())
+    .then(registration => {
       return registerPush(registration);
     })
     .then(subscription => {
