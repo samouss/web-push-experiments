@@ -15,7 +15,7 @@ const run = () => {
       isNotificationsSupported,
     });
 
-    document.querySelector('.content').insertBefore(element, before);
+    document.querySelector('.--content').insertBefore(element, before);
     document.querySelector('.button').setAttribute('disabled', true);
 
     return;
