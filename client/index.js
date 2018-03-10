@@ -21,7 +21,7 @@ const run = () => {
     return;
   }
 
-  const endpoint = process.env.ENDPOINT || 'http://localhost:3000';
+  const endpoint = process.env.endpoint || '';
   const publicKey = process.env.PUSH_PUBLIC_KEY || '';
 
   const client = createClient(endpoint);
