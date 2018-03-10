@@ -21,7 +21,7 @@ const run = () => {
     return;
   }
 
-  const endpoint = process.env.endpoint || '';
+  const endpoint = process.env.API_ENDPOINT || '';
   const publicKey = process.env.PUSH_PUBLIC_KEY || '';
 
   const client = createClient(endpoint);
