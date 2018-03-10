@@ -22,9 +22,7 @@ const run = () => {
   }
 
   const endpoint = process.env.ENDPOINT || 'http://localhost:3000';
-  const publicKey =
-    process.env.PUSH_PUBLIC_KEY ||
-    'BAIv1EJPFImOtD8FJqp8700aQ0BVN9xArXeBPSeyooHCyz8Qp-_D7jncuWsucNvFmp7m5Jiitep7tx_idBqv-ZE';
+  const publicKey = process.env.PUSH_PUBLIC_KEY || '';
 
   const client = createClient(endpoint);
   const deviceId = createDeviceId();
