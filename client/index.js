@@ -30,14 +30,7 @@ const run = () => {
   const deviceId = createDeviceId();
 
   const registerServiceWorker = () =>
-    navigator.serviceWorker
-      .register('./serviceWorker.js')
-      .then(registration => {
-        return registration;
-      })
-      .catch(error => {
-        return error;
-      });
+    navigator.serviceWorker.register('./serviceWorker.js');
 
   const registerPush = registration =>
     registration.pushManager.subscribe({
