@@ -65,7 +65,7 @@ const run = () => {
       });
     })
     .catch(error => {
-      console.log(error);
+      console.warn('Oops', error);
     });
 
   document.querySelector('form').addEventListener('submit', event => {
@@ -91,7 +91,7 @@ const run = () => {
         deviceId,
       })
       .catch(error => {
-        console.log(error);
+        console.warn('Oops', error);
       })
       .finally(() => {
         button.classList.remove('is-loading');
