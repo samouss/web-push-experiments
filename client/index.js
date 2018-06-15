@@ -68,7 +68,7 @@ const run = () => {
     })
     .then(subscription => {
       return client.subscriptions({
-        deviceId,
+        subscriptionId: subscription.endpoint,
         subscription,
       });
     })
@@ -93,10 +93,14 @@ const run = () => {
 
     button.classList.add('is-loading');
 
-    client
-      .notifications({
-        notification: payload,
-        deviceId,
+    navigator.serviceWorker
+      .getRegistration()
+      .then(registration => registration.pushManager.getSubscription())
+      .then(subscription => {
+        return client.notifications({
+          subscriptionId: subscription.endpoint,
+          notification: payload,
+        });
       })
       .catch(error => {
         console.warn('Oops', error);

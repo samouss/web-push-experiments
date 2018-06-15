@@ -26,17 +26,17 @@ server.use('/', express.static(path.join(__dirname, '..', 'static')));
 
 // Register a subscription
 server.post('/subscriptions', (req, res) => {
-  const { deviceId, subscription } = req.body;
+  const { subscriptionId, subscription } = req.body;
 
-  state.set(deviceId, subscription);
+  state.set(subscriptionId, subscription);
 
   res.status(201).end();
 });
 
 // Trigger notifications
 server.post('/notifications', (req, res) => {
-  const { deviceId, notification } = req.body;
-  const subscription = state.get(deviceId);
+  const { subscriptionId, notification } = req.body;
+  const subscription = state.get(subscriptionId);
   const payload = JSON.stringify(notification);
 
   webPush
