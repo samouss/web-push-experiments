@@ -1,5 +1,5 @@
 import 'bulma/css/bulma.css';
-import { encode, createDeviceId } from './utils';
+import { encode } from './utils';
 import { createNotificationElement, disableButtonElement } from './elements';
 import { createFallbackMessage, createDisableMessage } from './messages';
 import createClient from './createClient';
@@ -25,7 +25,6 @@ const run = () => {
   const publicKey = process.env.PUSH_PUBLIC_KEY || '';
 
   const client = createClient(endpoint);
-  const deviceId = createDeviceId();
 
   const registerServiceWorker = () =>
     navigator.serviceWorker.register('./serviceWorker.js');

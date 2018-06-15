@@ -33,17 +33,3 @@ export const encode = input => {
 
   return outputArray;
 };
-
-export const createDeviceId = () => {
-  const key = 'pushExperimentsIdentifier';
-  const item = window.localStorage.getItem(key);
-
-  if (item) {
-    return item;
-  }
-
-  const deviceId = uniqueId();
-  window.localStorage.setItem(key, deviceId);
-
-  return deviceId;
-};
