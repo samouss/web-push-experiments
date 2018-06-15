@@ -21,7 +21,7 @@ const uniqueId = () => {
 };
 
 export const encode = input => {
-  const padding = '='.repeat((4 - input.length % 4) % 4);
+  const padding = '='.repeat((4 - (input.length % 4)) % 4);
   const base64 = (input + padding).replace(/\-/g, '+').replace(/_/g, '/');
 
   const rawData = window.atob(base64);
