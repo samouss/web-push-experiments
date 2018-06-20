@@ -4674,9 +4674,9 @@ vm-browserify@0.0.4:
   dependencies:
     indexof "0.0.1"
 
-web-push@3.3.1:
-  version "3.3.1"
-  resolved "https://registry.yarnpkg.com/web-push/-/web-push-3.3.1.tgz#6d49517b927ffb97241a719d2f7f9014de130f09"
+web-push@3.3.2:
+  version "3.3.2"
+  resolved "https://registry.yarnpkg.com/web-push/-/web-push-3.3.2.tgz#7a8f8b77c8cb1875b02a53e45d7bc277a3d05368"
   dependencies:
     asn1.js "^5.0.0"
     http_ece "1.0.5"
