@@ -15,7 +15,7 @@
     "babel-preset-env": "1.7.0",
     "babel-preset-stage-2": "6.24.1",
     "nodemon": "1.18.4",
-    "parcel-bundler": "1.9.7"
+    "parcel-bundler": "1.10.0"
   },
   "dependencies": {
     "body-parser": "1.18.3",
