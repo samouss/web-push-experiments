@@ -19,7 +19,7 @@
   },
   "dependencies": {
     "body-parser": "1.19.0",
-    "bulma": "0.7.4",
+    "bulma": "0.7.5",
     "cors": "2.8.5",
     "express": "4.17.0",
     "web-push": "3.3.5"
